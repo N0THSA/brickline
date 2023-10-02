@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Discord stuff -->
+        <meta content="Brickline | Server browser" property="og:title" />
+        <meta content="Community server browser created by N0THSA" property="og:description" />
+        <meta content="http://209.25.140.181:45279/" property="og:url" />
+        <meta content="http://209.25.140.181:45279/static/favicon.ico" property="og:image" />
+        <meta content="#00ffa2" data-react-helmet="true" name="theme-color" />
+        <!-- End -->
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="icon" type="image/png" href="/static/img/favicon.ico">
+        <title>Brickline | Server Browser</title>
+        <style>
+            body {
+                max-width: 1024px;
+                margin: auto auto;
+                font-family: Arial, Helvetica, sans-serif;
+                background-image: url("/static/img/noise.png");
+            }
+
+            #container {
+                border-radius: 4px;
+                margin-top: 2%;
+                margin-bottom: 2%;
+                background-color: #1a1a1a;
+                padding: 10px;
+            }
+            
+            .sInfo {
+                color: var(--textColour);
+            }
+
+            .tInfo {
+                color: var(--link);
+            }
+			
+			.sInfo.name {
+				color: var(--headerSnd);
+			}
+
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 75%;
+            }
+
+			p.sInfo.ip {
+				padding-top: 5px;
+			}
+
+            p {
+                margin: 0;
+            }
+			
+			button {
+				margin-top: 10px;
+                margin-bottom: 20px;
+			}
+
+            li > p {
+                color: #adadad;
+            }
+
+            h3 {
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+
+            ol {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <img id="fatvetus" class="center" src="/static/img/fatvetus.png">
+            <marquee style="margin-bottom:0px;" scrollamount="4""><h1>NEWS: 9/28/23 - New Discord invite: <a href="https://discord.gg/9CSTxAkHNG">Discord</a> // 10/01/23 - Non-Playit.gg hosts are no longer supported.</h1></marquee>
+            <center>
+            {% if array|length > 0 %}
+                {% for _, v in array.items() %}
+                    <b class="sInfo name">{{ v["name"] }}</b>
+                    <p class="sInfo ip">IP: <span class="tInfo ip">{{ v["ip"] }}</span></p>
+                    <p class="sInfo port">Port: <span class="tInfo port">{{ v["port"] }}</span></p>
+                    <p class="sInfo client">Client: <span class="tInfo client">{{ v["client"] }}</span></p>
+                    <p class="sInfo map">Map: <span class="tInfo map">{{ v["map"] }}</span></p>
+                    <p class="sInfo uptime">Uptime: <span class="tInfo uptime">{{ v["uptime"] }}</span></p>
+                    <p class="sInfo players">Players: <span class="tInfo players">{{ v["players"] }}</span></p>
+                    <p class="sInfo novetusver">Novetus version: <span class="tInfo novetusver">{{ v["novetusver"] }}</span></p>
+                    <button onclick="window.location.href=`novetus://{{ v['b64uri']|safe }}`;">Launch Novetus</button>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <p>There are no current servers on this master server</p>
+            {% endif %}
+            </center>
+            <hr>
+
+            <h3>How to connect:</h3>
+            <p>Make sure you have Novetus URI installed.</p>
+            <b>If you're on Linux you can try this <a href="https://github.com/enuf96/novetus-uri-linux/blob/main/installuri.py">NovetusURI installer</a>.</b>
+            <ol>
+                <li><p>To install it, open up NovetusBootstrapper <b>as administrator.</b></p></li>
+                <li><p>Then, click on "INSTALL URI" at the bottom right inside of "other options".</p></li>
+                <li><p>Once the pop up window opens, click "Install URI and UserAgent". Then you're done, you can now join any server you want just by clicking on the "Launch Novetus" button under the server details</p></li>
+                <br>
+            </ol>
+            <h3>How to host:</h3>
+            <ol>
+                <li><p>Go to this link and download: <a href="/static/addon.zip">addon.zip</a></p></li>
+                <li><p>Extract the contents of addon.zip inside of Novetus\Addons\ and you're done</p></li>
+                <li><p>Change the server name by editing the "ServerName" variable at the top of "Brickline.lua".</p></li>
+                <br>
+                <b>Note: If you're using other custom addon scripts, do not replace AddonLoader.lua. Instead, open the file and manually add the string "Brickline" to the Addons table.</b>
+            </ol>
+            <h3>How to configure your server for <a href="//playit.gg">playit.gg</a></h3>
+            <ol>
+                <b><a href="//playit.gg">Playit.gg</a> is required due to a potential exploit. Here are instructions to configure the addon for Playit.gg:</b>
+                <li><p>Open up Brickline.lua</p></li>
+                <li><p>Change the PLAYIT_ADDR to your respective Playit domain "e.g. mygame.playit.gg" and the PLAYIT_PORT to your respective port number you got assigned from Playit</p></li>
+            </ol>
+            <h3>API?</h3>
+            <ol>
+                <a href="/api">Link</a>
+            </ol>
+        </div>
+    </body>
+</html>
